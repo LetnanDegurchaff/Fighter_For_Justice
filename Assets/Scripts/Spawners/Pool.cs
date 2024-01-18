@@ -19,9 +19,9 @@ public class Pool<T> where T : MonoBehaviour
         }
     }
 
-    public bool TrySpawnObject(Vector3 position)
+    public bool TrySpawnObject(Vector3 position, out T spawned)
     {
-        T spawned = null;
+        spawned = null;
 
         if (_objects.Count == 0)
             return false;
@@ -32,7 +32,7 @@ public class Pool<T> where T : MonoBehaviour
             {
                 obj.transform.position = position;
                 obj.gameObject.SetActive(true);
-                Debug.Log("создал");
+                spawned = obj;
                 
                 return true;
             }            

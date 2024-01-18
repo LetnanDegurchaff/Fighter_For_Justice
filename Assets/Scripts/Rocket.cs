@@ -14,13 +14,13 @@ public class Rocket : MonoBehaviour
 
     private Type _targetType;
     private Rigidbody _rigidbody;
+    private Transform _transform;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _targetType = GetTargetType(_focusType);
-        
-        Invoke(nameof(SelfDestroy), _lifeTime);
+        _transform = transform;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,8 +38,9 @@ public class Rocket : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector3 direction)
+    public void Initialize(Vector3 direction, Quaternion quaternion)
     {
+        _transform.rotation = quaternion;
         _rigidbody.velocity = direction * _speed;
     }
 

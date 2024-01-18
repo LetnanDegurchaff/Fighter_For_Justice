@@ -1,18 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Rocket _rocketTemplate;
+    
+    private Pool<Rocket> _pool;
 
-    // Update is called once per frame
-    void Update()
+    public void TrySpawnRocket(Vector3 position, Quaternion quaternion, Vector3 direction, out Rocket rocket)
     {
+        if (_pool.TrySpawnObject(position, out rocket))
+        {
+            rocket.Initialize(direction, quaternion);
+        }
+    }
+    
+    public void InitializePool(int poolCapacity)
+    {
+        _pool?.Clear();
         
+        List<Rocket> rockets = new List<Rocket>();
+
+        for (int i = 0; i < poolCapacity; i++)
+        {
+            rockets.Add(Instantiate(_rocketTemplate));
+        }
+        
+        _pool = new Pool<Rocket>(rockets);
     }
 }

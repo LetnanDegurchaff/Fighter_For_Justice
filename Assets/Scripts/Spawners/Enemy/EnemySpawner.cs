@@ -8,12 +8,8 @@ public class EnemySpawner : MonoBehaviour
     
     private Pool<EnemyController> _pool;
 
-    public bool TrySpawnEnemy(Vector3 position)
-    {
-        bool isSpawned = _pool.TrySpawnObject(position);
-        
-        return isSpawned;
-    }
+    public bool TrySpawnEnemy(Vector3 position) =>
+        _pool.TrySpawnObject(position, out EnemyController _);
     
     public void InitializePool(int poolCapacity)
     {

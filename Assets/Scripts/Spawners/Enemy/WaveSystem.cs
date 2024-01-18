@@ -47,12 +47,11 @@ public class WaveSystem : MonoBehaviour
     public void StartNewWave()
     {
         StartCoroutine(Spawning(_waves.Dequeue()));
-        
     }
 
     private IEnumerator Spawning(Wave wave)
     {
-        WaitForSeconds spawningDelay = new WaitForSeconds(1);
+        WaitForSeconds spawningDelay = new WaitForSeconds(wave.SpawnDelay);
 
         for (int i = 0; i < wave.EnemyAmount + 1; i++)
         {
