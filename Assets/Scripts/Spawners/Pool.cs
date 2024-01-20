@@ -39,7 +39,7 @@ public class Pool<T> where T : MonoBehaviour
         }
         
         return false;
-    }
+}
 
     public void Clear()
     {
